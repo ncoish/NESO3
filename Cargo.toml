@@ -1,0 +1,7 @@
+[package]
+name = "neso3"
+version = "0.1.0"
+authors = ["Nick Coish <nick.coish@gmail.com>"]
+
+[dependencies]
+portaudio = "0.7.0"
