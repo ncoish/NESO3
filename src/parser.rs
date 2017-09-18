@@ -6,6 +6,9 @@ use std::io::{BufReader, Read};
 use ppu;
 use memory::{GameMemory};
 
+const PRG_PAGE_SIZE: usize = 16_384;
+const CHR_PAGE_SIZE: usize = 8_192;
+
 #[derive(Debug, PartialEq)]
 pub enum TVSystem {
     NTSC,
@@ -78,17 +81,17 @@ pub fn parse_rom(filename: &str) -> Result<GameMemory, Box<error::Error>> {
         },
         false => None
     };
-    let mut prg_rom = Vec::new();
-    let mut buf = [0; 16_384];
+    let mut prg_rom = Vec::with_capacity(PRG_PAGE_SIZE * header.prg_rom_banks as usize);
+    let mut buf = [0; PRG_PAGE_SIZE];
     for _ in 0..header.prg_rom_banks {
         contents.read_exact(&mut buf)?;
-        prg_rom.push(buf);
+        prg_rom.extend(buf.iter().cloned());
     }
-    let mut chr_rom = Vec::new();
-    let mut buf = [0; 8_192];
+    let mut chr_rom = Vec::with_capacity(CHR_PAGE_SIZE * header.chr_rom_banks as usize);
+    let mut buf = [0; CHR_PAGE_SIZE];
     for _ in 0..header.chr_rom_banks {
         contents.read_exact(&mut buf)?;
-        chr_rom.push(buf);
+        chr_rom.extend(buf.iter().cloned());
     }
     let game_memory = GameMemory {
         header,

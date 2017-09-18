@@ -4,8 +4,8 @@ use parser::Header;
 pub struct GameMemory {
     pub header: Header,
     pub trainer: Option<[u8; 512]>,
-    pub prg_rom: Vec<[u8; 16_384]>,
-    pub chr_rom: Vec<[u8; 8_192]>,
+    pub prg_rom: Vec<u8>,
+    pub chr_rom: Vec<u8>,
 }
 
 impl fmt::Debug for GameMemory {
