@@ -5,3 +5,4 @@ authors = ["Nick Coish <nick.coish@gmail.com>"]
 
 [dependencies]
 portaudio = "0.7.0"
+clap = "2.26"
