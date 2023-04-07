@@ -7,9 +7,6 @@ build = "build.rs"
 
 [dependencies]
 clap = "2.26"
-portaudio = "0.7.0"
 sdl2 = "0.30.0"
 gl = "0.6.3"
 
-# [dependencies.gl]
-# git = "https://github.com/bjz/gl-rs"
