@@ -1,11 +1,17 @@
 extern crate clap;
+extern crate sdl2;
+extern crate gl;
 
 use std::io;
 use clap::{Arg, App};
 
 mod parser;
-mod ppu;
 mod memory;
+mod mapper;
+mod cpu;
+mod ppu;
+mod gfx;
+mod util;
 
 fn main() {
     let matches = App::new("NESO3")
@@ -16,6 +22,10 @@ fn main() {
             .short("t")
             .long("test")
             .help("Enter test mode to test various ROMs"))
+        .arg(Arg::with_name("gl")
+            .short("g")
+            .long("gl")
+            .help("Render with OpenGL"))
         .get_matches();
 
     if matches.is_present("test") {
@@ -35,5 +45,17 @@ fn main() {
             };
             println!("Rom data: {:?}", rom);
         }
+    }
+
+    // let cpu = cpu::CPU {
+    //     memory: [0; 0x10000]
+    // };
+
+    // let ppu = ppu::PPU {
+    //     memory: [0; 0x4000]
+    // };
+
+    if matches.is_present("gl") {
+        gfx::do_window();
     }
 }

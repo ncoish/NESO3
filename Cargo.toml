@@ -1,8 +1,15 @@
 [package]
 name = "neso3"
 version = "0.1.0"
+edition = "2021"
 authors = ["Nick Coish <nick.coish@gmail.com>"]
+build = "build.rs"
 
 [dependencies]
-portaudio = "0.7.0"
 clap = "2.26"
+portaudio = "0.7.0"
+sdl2 = "0.30.0"
+gl = "0.6.3"
+
+# [dependencies.gl]
+# git = "https://github.com/bjz/gl-rs"
